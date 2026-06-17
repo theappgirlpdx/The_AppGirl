@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The App Girl — Mobile Apps for Local Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#08080F;--blue:#3B82F6;--blue2:#60A5FA;
+  --glow:rgba(59,130,246,0.12);--border:rgba(59,130,246,0.22);
+  --gray:#0f0f18;--card:#13131f;--muted:#555;--white:#fff
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;max-width:430px;margin:0 auto;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid #13131f}
+.nav-mark{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:-0.5px}
+.nav-mark span{color:var(--blue)}
+.nav-cta{background:var(--blue);color:var(--white);font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:4px;cursor:pointer;border:none;box-shadow:0 0 20px rgba(59,130,246,0.3)}
+
+/* HERO */
+.hero{padding:56px 24px 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(59,130,246,0.12) 0%,transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 70%);border-radius:50%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--glow);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--blue2);margin-bottom:24px}
+.dot{width:5px;height:5px;background:var(--blue);border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:46px;line-height:1;letter-spacing:-2px;margin-bottom:20px}
+.hero-h1 em{font-style:normal;color:var(--blue2);text-shadow:0 0 30px rgba(59,130,246,0.5)}
+.hero-sub{font-size:15px;font-weight:300;color:#777;line-height:1.65;margin-bottom:32px}
+.hero-sub strong{color:var(--white);font-weight:500}
+.cta-group{display:flex;flex-direction:column;gap:10px}
+.btn-primary{background:var(--blue);color:var(--white);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:15px 24px;border-radius:6px;border:none;cursor:pointer;text-align:center;box-shadow:0 4px 24px rgba(59,130,246,0.35);transition:all 0.2s}
+.btn-secondary{background:transparent;color:#444;font-size:13px;padding:15px 24px;border-radius:6px;border:1px solid #1e1e2e;cursor:pointer;text-align:center;transition:all 0.2s}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:1px solid #13131f;border-bottom:1px solid #13131f;padding:13px 0;background:#0a0a14}
+.marquee-track{display:flex;gap:32px;animation:marquee 20s linear infinite;white-space:nowrap}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.marquee-item{font-family:'Syne',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#1e1e2e;flex-shrink:0}
+.marquee-item span{color:var(--blue);margin-right:28px}
+
+/* SECTIONS */
+.section{padding:48px 24px;border-top:1px solid #13131f}
+.sec-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#333;margin-bottom:8px}
+.sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;letter-spacing:-1px;line-height:1.1;margin-bottom:6px}
+.sec-title em{font-style:normal;color:var(--blue2)}
+.sec-sub{font-size:13px;color:#555;font-weight:300;line-height:1.5;margin-bottom:28px}
+
+/* SERVICES */
+.service-item{padding:22px 0;border-bottom:1px solid #0f0f18;display:flex;align-items:start;gap:16px}
+.service-item:last-child{border:none}
+.service-num{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--blue);min-width:28px;letter-spacing:1px;margin-top:2px}
+.service-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px}
+.service-desc{font-size:13px;color:#555;line-height:1.5;font-weight:300}
+
+/* PORTFOLIO */
+.portfolio-card{background:var(--card);border-radius:20px;border:1px solid #1a1a2e;margin-bottom:16px;overflow:hidden}
+.port-header{padding:16px 18px 12px;border-bottom:1px solid #1a1a2e;display:flex;align-items:center;justify-content:space-between}
+.port-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px}
+.port-type{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#333;margin-top:2px}
+.port-badge{font-size:9px;padding:4px 10px;border-radius:20px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.badge-live{background:rgba(44,168,110,0.15);color:#2ca86e;border:1px solid rgba(44,168,110,0.3)}
+.badge-soon{background:rgba(59,130,246,0.12);color:var(--blue2);border:1px solid var(--border)}
+.phone-wrap{padding:16px 18px;display:flex;justify-content:center}
+.phone-frame{width:180px;background:#111;border-radius:28px;padding:8px;box-shadow:0 0 0 1px #1e1e2e,0 20px 50px rgba(0,0,0,0.8),0 0 40px rgba(59,130,246,0.05)}
+.phone-notch{height:16px;display:flex;align-items:center;justify-content:center}
+.phone-camera{width:7px;height:7px;background:#1e1e1e;border-radius:50%;border:1px solid #252525}
+.phone-screen{border-radius:18px;overflow:hidden;height:320px;background:#080808}
+.phone-screen iframe{width:375px;height:812px;border:none;display:block;transform:scale(0.4);transform-origin:top left;pointer-events:auto}
+.phone-screen-placeholder{height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#2a2a3a}
+.phone-screen-placeholder .big{font-size:36px}
+.phone-screen-placeholder p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2a2a3a}
+.phone-home-bar{height:16px;display:flex;align-items:center;justify-content:center}
+.phone-bar{width:50px;height:3px;background:#222;border-radius:2px}
+.port-footer{padding:12px 18px;border-top:1px solid #1a1a2e;display:flex;justify-content:space-between;align-items:center}
+.port-features{display:flex;gap:6px;flex-wrap:wrap}
+.port-feat{font-size:9px;background:#0f0f18;border:1px solid #1a1a2e;border-radius:20px;padding:3px 8px;color:#444;letter-spacing:1px;text-transform:uppercase}
+
+/* PRICING */
+.price-card{background:var(--card);border-radius:16px;padding:26px;border:1px solid #1a1a2e;margin-bottom:12px}
+.price-card.featured{background:linear-gradient(135deg,#060614,#08080f);border-color:var(--border);box-shadow:0 0 40px rgba(59,130,246,0.08)}
+.price-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#333;margin-bottom:12px;display:block}
+.price-card.featured .price-tag{color:var(--blue2);opacity:0.6}
+.price-amount{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:4px}
+.price-card.featured .price-amount{color:var(--blue2);text-shadow:0 0 20px rgba(59,130,246,0.4)}
+.price-period{font-size:13px;color:#333;margin-bottom:14px}
+.price-name{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:10px}
+.price-desc{font-size:13px;color:#555;line-height:1.5;font-weight:300}
+.price-includes{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.price-inc-item{font-size:12px;color:#555;display:flex;align-items:center;gap:8px}
+.price-inc-item::before{content:'✓';color:var(--blue);font-weight:700;font-size:11px}
+
+/* ABOUT */
+.about-card{background:linear-gradient(135deg,#060614,#080810);border:1px solid var(--border);border-radius:20px;padding:26px;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(59,130,246,0.1),transparent 70%);border-radius:50%}
+.about-avatar{width:60px;height:60px;background:linear-gradient(135deg,var(--blue),#1d4ed8);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;position:relative;box-shadow:0 0 20px rgba(59,130,246,0.3)}
+.about-name{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;margin-bottom:3px}
+.about-name span{color:var(--blue2)}
+.about-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);opacity:0.6;margin-bottom:14px}
+.about-bio{font-size:14px;color:#777;line-height:1.75;font-weight:300}
+.about-bio strong{color:var(--white);font-weight:500}
+.about-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.about-tag{background:var(--glow);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--blue2)}
+
+/* CONTACT */
+.contact-card{background:var(--card);border-radius:20px;padding:26px;border:1px solid #1a1a2e}
+.contact-title{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;letter-spacing:-1px;margin-bottom:6px;line-height:1.1}
+.contact-title em{font-style:normal;color:var(--blue2)}
+.contact-sub{font-size:13px;color:#555;margin-bottom:22px;line-height:1.5}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#0a0a14;border-radius:14px;border:1px solid #1a1a28;margin-bottom:8px;text-decoration:none;transition:border-color 0.2s;cursor:pointer}
+.contact-item:hover{border-color:var(--border)}
+.contact-icon{font-size:18px;min-width:26px;text-align:center}
+.contact-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#333;margin-bottom:2px}
+.contact-val{font-size:13px;font-weight:500;color:var(--white)}
+.contact-val.blue{color:var(--blue2)}
+
+footer{padding:24px;border-top:1px solid #0f0f18;display:flex;align-items:center;justify-content:space-between}
+.footer-mark{font-family:'Syne',sans-serif;font-weight:800;font-size:13px}
+.footer-mark span{color:var(--blue2)}
+.footer-copy{font-size:11px;color:#252525}
+
+/* ── RESPONSIVE ── */
+@media (min-width: 768px) {
+  body { max-width: 100%; }
+  nav { padding: 16px 48px; max-width: 1200px; margin: 0 auto; }
+  .hero { padding: 80px 48px 60px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .hero::before, .hero::after { display: none; }
+  .hero-h1 { font-size: 56px; }
+  .hero-sub { font-size: 16px; max-width: 100%; }
+  .cta-group { flex-direction: row; }
+  .btn-primary, .btn-secondary { flex: 1; }
+  .section { padding: 64px 48px; max-width: 1200px; margin: 0 auto; }
+  .sec-title { font-size: 36px; }
+  .portfolio-card { display: grid; grid-template-columns: 1fr 1fr; }
+  .port-header { grid-column: 1 / -1; }
+  .port-footer { grid-column: 1 / -1; }
+  .phone-wrap { padding: 20px; }
+  .about-card { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; }
+  .about-avatar { margin-bottom: 0; }
+  .about-tags { grid-column: 1 / -1; }
+  .contact-card { padding: 36px; }
+  .price-card { padding: 32px; }
+}
+
+@media (min-width: 1024px) {
+  nav { max-width: 1400px; padding: 18px 80px; }
+  .hero { max-width: 1400px; padding: 100px 80px 80px; gap: 80px; }
+  .hero-h1 { font-size: 68px; }
+  .section { max-width: 1400px; padding: 80px 80px; }
+  .sec-title { font-size: 42px; }
+  .service-item { padding: 28px 0; }
+  .service-name { font-size: 17px; }
+  .portfolio-card { display: block; }
+  .price-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">The App<span>Girl</span></div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's Work</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><span class="dot"></span> Beaverton, OR · Available Now</div>
+  <h1 class="hero-h1">Small business.<br><em>Big presence.</em></h1>
+  <p class="hero-sub">I build <strong>custom mobile apps</strong> for local businesses — bars, salons, restaurants, gyms. Customers scan a QR code and they're in. <strong>No app store. No downloads. No tech headaches.</strong></p>
+  <div class="cta-group">
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">→ Get Your App Built</button>
+    <button class="btn-secondary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">See Live Work</button>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>✦</span> Bars & Lounges</div>
+    <div class="marquee-item"><span>✦</span> Restaurants</div>
+    <div class="marquee-item"><span>✦</span> Hair Salons</div>
+    <div class="marquee-item"><span>✦</span> Barbershops</div>
+    <div class="marquee-item"><span>✦</span> Food Trucks</div>
+    <div class="marquee-item"><span>✦</span> Gyms & Trainers</div>
+    <div class="marquee-item"><span>✦</span> Nail Techs</div>
+    <div class="marquee-item"><span>✦</span> Event Vendors</div>
+    <div class="marquee-item"><span>✦</span> Bars & Lounges</div>
+    <div class="marquee-item"><span>✦</span> Restaurants</div>
+    <div class="marquee-item"><span>✦</span> Hair Salons</div>
+    <div class="marquee-item"><span>✦</span> Barbershops</div>
+    <div class="marquee-item"><span>✦</span> Food Trucks</div>
+    <div class="marquee-item"><span>✦</span> Gyms & Trainers</div>
+    <div class="marquee-item"><span>✦</span> Nail Techs</div>
+    <div class="marquee-item"><span>✦</span> Event Vendors</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section">
+  <div class="sec-label">What I Do</div>
+  <h2 class="sec-title">Everything your<br>business <em>needs.</em></h2>
+  <p class="sec-sub">Every app I build is custom — your brand, your colors, your content. Built to impress and easy to update.</p>
+  <div class="service-item"><div class="service-num">01</div><div><div class="service-name">Custom App Design</div><div class="service-desc">Built from scratch to match your brand — colors, fonts, vibe. No templates, no cookie-cutter layouts.</div></div></div>
+  <div class="service-item"><div class="service-num">02</div><div><div class="service-name">Menu & Services</div><div class="service-desc">Full digital menu or services list — organized, beautiful, and always up to date.</div></div></div>
+  <div class="service-item"><div class="service-num">03</div><div><div class="service-name">Events & Specials</div><div class="service-desc">Customers always know what's on — weekly events, recurring nights, and tonight's drink specials.</div></div></div>
+  <div class="service-item"><div class="service-num">04</div><div><div class="service-name">Bookings & Requests</div><div class="service-desc">Private event requests, appointment booking, or custom intake forms — whatever your business needs.</div></div></div>
+  <div class="service-item"><div class="service-num">05</div><div><div class="service-name">Owner Dashboard</div><div class="service-desc">PIN-protected backend so you can update your own specials, events, and hours without texting me every week.</div></div></div>
+  <div class="service-item"><div class="service-num">06</div><div><div class="service-name">QR Code Ready</div><div class="service-desc">One QR code on your counter, business card, or Instagram bio. Customers scan — they're in. No download needed.</div></div></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="sec-label">Live Work</div>
+  <h2 class="sec-title">See it in <em>action.</em></h2>
+  <p class="sec-sub">Real apps built for real local businesses. Tap around — they're fully interactive.</p>
+
+  <!-- LA MADRINA -->
+  <div class="portfolio-card">
+    <div class="port-header">
+      <div>
+        <div class="port-name">La Madrina</div>
+        <div class="port-type">Cocktail Lounge · Beaverton, OR</div>
+      </div>
+      <div class="port-badge badge-live">Live</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-camera"></div></div>
+        <div class="phone-screen">
+          <iframe id="lm-frame" scrolling="yes" title="La Madrina Demo"></iframe>
+        </div>
+        <div class="phone-home-bar"><div class="phone-bar"></div></div>
+      </div>
+    </div>
+    <div class="port-footer">
+      <div class="port-features">
+        <div class="port-feat">Menu</div>
+        <div class="port-feat">Events</div>
+        <div class="port-feat">Gallery</div>
+        <div class="port-feat">Dashboard</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER -->
+  <div class="portfolio-card">
+    <div class="port-header">
+      <div>
+        <div class="port-name">Your Business</div>
+        <div class="port-type">Could be next · Portland Metro</div>
+      </div>
+      <div class="port-badge badge-soon">Coming Soon</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-camera"></div></div>
+        <div class="phone-screen">
+          <div class="phone-screen-placeholder">
+            <div class="big">📱</div>
+            <p>Your app here</p>
+          </div>
+        </div>
+        <div class="phone-home-bar"><div class="phone-bar"></div></div>
+      </div>
+    </div>
+    <div class="port-footer">
+      <div class="port-features">
+        <div class="port-feat">Custom Build</div>
+        <div class="port-feat">Your Brand</div>
+        <div class="port-feat">Your Colors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="sec-label">Pricing</div>
+  <h2 class="sec-title">Simple.<br><em>No surprises.</em></h2>
+  <p class="sec-sub">Flat rate to build. Low monthly to keep it running and updated.</p>
+  <div class="price-card featured">
+    <span class="price-tag">One Time · Build Fee</span>
+    <div class="price-amount">$400</div>
+    <div class="price-period" style="color:#444">paid once</div>
+    <div class="price-name">Custom App Build</div>
+    <div class="price-desc">Your brand, your colors, your content — built from scratch and delivered ready to share.</div>
+    <div class="price-includes">
+      <div class="price-inc-item">Custom design matched to your brand</div>
+      <div class="price-inc-item">Menu, events, hours & info pages</div>
+      <div class="price-inc-item">Owner dashboard with PIN login</div>
+      <div class="price-inc-item">QR code ready to print & share</div>
+      <div class="price-inc-item">Delivered within 1 week</div>
+    </div>
+  </div>
+  <div class="price-card">
+    <span class="price-tag">Monthly · Maintenance</span>
+    <div class="price-amount" style="color:var(--blue2)">$100</div>
+    <div class="price-period" style="color:#333">per month · cancel anytime</div>
+    <div class="price-name">Keep It Fresh</div>
+    <div class="price-desc">I keep your app updated so you don't have to think about it.</div>
+    <div class="price-includes">
+      <div class="price-inc-item">Weekly event & special updates</div>
+      <div class="price-inc-item">Menu changes & new items</div>
+      <div class="price-inc-item">Hosting & uptime included</div>
+      <div class="price-inc-item">Same-day support via text or DM</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="sec-label">Who's Behind It</div>
+  <h2 class="sec-title">Meet <em>The App Girl.</em></h2>
+  <div class="about-card">
+    <div class="about-avatar">👩‍💻</div>
+    <div class="about-name">Julia <span>Chobu</span></div>
+    <div class="about-title">Founder · App Developer · Beaverton, OR</div>
+    <p class="about-bio">
+      I'm a <strong>CIS student and app developer</strong> based in Beaverton, OR. I started The App Girl after noticing that so many amazing local businesses had no digital presence beyond an Instagram page — and I knew I could fix that.<br><br>
+      I build <strong>custom mobile apps for local businesses</strong> in the Portland metro area. Every app is designed from scratch to match your brand and built to actually help your customers — not just look pretty. <strong>Fast turnaround, flat pricing, and I actually pick up the phone.</strong><br><br>
+      No agency markups. No confusing contracts. Just your business in your customers' pockets.
+    </p>
+    <div class="about-tags">
+      <span class="about-tag">📍 Beaverton, OR</span>
+      <span class="about-tag">⚡ 1 Week Turnaround</span>
+      <span class="about-tag">💬 Fast Response</span>
+      <span class="about-tag">🎓 CIS Student</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="sec-label">Get Started</div>
+  <h2 class="sec-title" style="margin-bottom:6px">Let's <em>work together.</em></h2>
+  <p style="font-size:13px;color:#444;margin-bottom:24px;font-weight:300">Reach out on any of these — I usually respond within a few hours.</p>
+  <div class="contact-card">
+    <div class="contact-title">Ready for your<br><em>own app?</em></div>
+    <p class="contact-sub">DM me, email me, or text me. Let's talk about your business.</p>
+    <a class="contact-item" href="https://instagram.com/The_AppGirl" target="_blank">
+      <div class="contact-icon">📸</div>
+      <div><div class="contact-label">Instagram</div><div class="contact-val blue">@The_AppGirl</div></div>
+    </a>
+    <a class="contact-item" href="mailto:theappgirlpdx@gmail.com">
+      <div class="contact-icon">📧</div>
+      <div><div class="contact-label">Email</div><div class="contact-val">theappgirlpdx@gmail.com</div></div>
+    </a>
+    <a class="contact-item" href="tel:+19714924114">
+      <div class="contact-icon">📞</div>
+      <div><div class="contact-label">Phone / Text</div><div class="contact-val">(971) 492-4114</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-mark">The App<span>Girl</span></div>
+  <div class="footer-copy">&copy; 2026 &middot; Beaverton, OR</div>
+</footer>
+
+<script>
+document.getElementById('lm-frame').src = 'la-madrina.html';
+</script>
+</body>
+</html>
+`;
+var blob = new Blob([lmSrc], {type: 'text/html'});
+document.getElementById('lm-frame').src = URL.createObjectURL(blob);
+</script>
+</body>
+</html>
